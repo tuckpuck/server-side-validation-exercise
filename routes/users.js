@@ -22,6 +22,15 @@ router.post('/' , (req, res, next) => {
   let email = req.body.users.email;
   let phone = req.body.users.phone;
 
+  if (!email || email.trim() === '') {
+   const err = new Error('Email must not be blank');
+   err.status = 400;
+
+   return next(err);
+ }
+
+
+
   knex('users')
     .insert({
       firstname: firstName,
